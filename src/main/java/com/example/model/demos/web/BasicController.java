@@ -17,10 +17,9 @@
 package com.example.model.demos.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
@@ -63,5 +62,13 @@ public class BasicController {
             , @RequestParam(name = "age", defaultValue = "12") Integer age, User user) {
         user.setName("zhangsan");
         user.setAge(18);
+    }
+
+
+    @PostMapping("/haha")
+    @ResponseBody
+    public String haha(@RequestBody Map<String, String> payload) {
+        String name = payload.get("name"); // 从请求体中获取 'name' 值
+        return "Hello " + name;
     }
 }
