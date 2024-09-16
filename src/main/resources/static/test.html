@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.15); /* Slightly transparent */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      backdrop-filter: blur(10px); /* Glassmorphism effect */
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .login-container h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.2); /* Input background */
+      color: white;
+      outline: none;
+      text-align: center;
+      caret-color: #6a11cb; /* Custom caret color */
+    }
+    .input-group input::placeholder {
+      color: #e0e0e0;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      background-color: #2575fc;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    .login-btn:hover {
+      background-color: #1d65c1;
+    }
+    .login-container p {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .login-container a {
+      color: #ffffff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .login-container a:hover {
+      color: #f0f0f0;
+    }
+    @media (max-width: 600px) {
+      .login-container {
+        padding: 20px;
+      }
+      .login-container h2 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Login</h2>
+  <form id="login-form">
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" required>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+    </div>
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+  <p>Don't have an account? <a href="#">Sign up</a></p>
+</div>
+
+<script>
+  const form = document.getElementById('login-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // 防止页面刷新
+
+    // 获取用户输入的用户名和密码
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // 构建请求体
+    const loginData = {
+      username: username,
+      password: password
+    };
+
+    try {
+      // 发起 POST 请求到后端登录接口
+      const response = await fetch('http://your-backend-url/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      });
+
+      // 检查响应状态
+      if (response.ok) {
+        const data = await response.json(); // 假设后端返回 JSON 数据
+        // 登录成功后处理逻辑，比如重定向到主页
+        alert('Login successful!');
+        window.location.href = '/home'; // 登录成功后跳转到主页
+      } else {
+        // 登录失败，显示错误信息
+        alert('Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while trying to log in.');
+    }
+  });
+</script>
+
+</body>
+</html>

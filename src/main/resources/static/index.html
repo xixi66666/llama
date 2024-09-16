@@ -110,8 +110,20 @@
       background-color: #c82333;
     }
     #history-item {
-      margin-bottom: 10px;
+      margin-bottom: 30px;
+      padding: 10px 20px;  /* 添加内边距来突出显示 */
+      border: 2px solid #e0e0e0;
+      border-radius: 30px; /* 设置椭圆边框 */
+      background-color: #d1e7ff; /* 背景颜色 */
+      font-size: 16px; /* 调整字体大小 */
       cursor: pointer;
+      text-align: center; /* 使日期居中显示 */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+      transition: background-color 0.3s ease; /* 鼠标悬停时的动画效果 */
+    }
+
+    #history-item:hover {
+      background-color: #e0e0e0; /* 鼠标悬停时改变背景颜色 */
     }
     /* Responsive design */
     @media (max-width: 768px) {
@@ -127,7 +139,7 @@
 </head>
 <body>
 <div id="sidebar">
-  <h2>Chat History</h2>
+  <h2>历史对话</h2>
   <div id="history"></div>
 </div>
 <div id="chat-container">
@@ -157,12 +169,19 @@
       const session = sessions[date];
       const historyItem = document.createElement('div');
       historyItem.id = 'history-item';
-      historyItem.textContent = `Session ${date}`;
+      historyItem.textContent = ` ${date}`;
       historyItem.addEventListener('click', () => {
         displaySession(session);
       });
       historyDiv.appendChild(historyItem);
     });
+  };
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const month = date.toLocaleString('zh-CN', { month: 'long' });
+    const day = date.getDate();
+    return `${month}${day}日`;
   };
 
   // Display a particular session in the messages area
@@ -175,7 +194,8 @@
   };
 
   // Add message to chat
-  const addMessageToChat = (text, type) => {
+    // Add message to chat
+    const addMessageToChat = (text, type) => {
     const wrapperDiv = document.createElement('div');
     wrapperDiv.classList.add('message-wrapper');
 
@@ -185,6 +205,11 @@
 
     wrapperDiv.appendChild(messageDiv);
     messagesDiv.appendChild(wrapperDiv);
+
+    // Ensure scrolling to bottom after appending the new message
+    setTimeout(() => {
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }, 0); // Delay to ensure the DOM is updated
   };
 
   // Save session to localStorage
@@ -201,7 +226,7 @@
   // Simulate backend response
   const getBackendResponse = async (userMessage) => {
     try {
-      const response = await fetch('http://localhost:8080/haha', {
+      const response = await fetch('/haha', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
