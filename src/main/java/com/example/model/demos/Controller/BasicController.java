@@ -16,9 +16,11 @@
 
 package com.example.model.demos.Controller;
 
+import com.example.model.llama.sendFuncation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -67,8 +69,9 @@ public class BasicController {
 
     @PostMapping("/haha")
     @ResponseBody
-    public String haha(@RequestBody Map<String, String> payload) {
+    public String haha(@RequestBody Map<String, String> payload) throws IOException {
         String name = payload.get("name"); // 从请求体中获取 'name' 值
-        return "Hello " + name;
+        sendFuncation sendFuncation = new sendFuncation();
+        return "Hello " + sendFuncation.sendFuncation(name);
     }
 }
