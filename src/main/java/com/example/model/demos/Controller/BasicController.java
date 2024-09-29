@@ -70,7 +70,7 @@ public class BasicController {
     @PostMapping("/haha")
     @ResponseBody
     public String haha(@RequestBody Map<String, String> payload) throws IOException {
-        String name = payload.get("name"); // 从请求体中获取 'name' 值
+        String name = payload.get("name");
         sendFuncation sendFuncation = new sendFuncation();
         return "Hello " + sendFuncation.sendFuncation(name);
     }
