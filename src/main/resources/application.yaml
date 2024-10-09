@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/school
+    url: jdbc:mysql://localhost:3306/llama
     username: root
     password: qsc13579
     #    type: com.zaxxer.hikari.HikariDataSource

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.model.demos.Controller;
+package com.example.model.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

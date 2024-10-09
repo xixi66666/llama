@@ -14,16 +14,25 @@
  * limitations under the License.
  */
 
-package com.example.model.demos.Controller;
+package com.example.model.bo;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
 public class User {
 
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String name;
 
-    private Integer age;
 
     private String password;
 
@@ -43,11 +52,5 @@ public class User {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 }
