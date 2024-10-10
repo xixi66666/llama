@@ -1,5 +1,6 @@
 package com.example.model.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.model.bo.User;
 import com.example.model.service.loginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,18 @@ public class LoginController {
         return "login.html";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", produces = "application/json;charset=utf-8")
     @ResponseBody
     public String login(@RequestBody User user) {
+        JSONObject jsonObject = new JSONObject();
+
         User user1 = loginService.LoginVerification(user);
         if(user1 != null){
-            System.out.println(user1.getName());
-            System.out.println(user1.getPassword());
-            return "true";
+            jsonObject.put("Status","true");
+            return jsonObject.toJSONString();
         }else{
-            System.out.println("--------------------------------");
-            return "用户账户或者密码错误，请重新输入！";
+            jsonObject.put("Status","用户名或密码不正确，请重试！");
+            return jsonObject.toJSONString();
         }
     }
 }
