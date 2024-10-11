@@ -29,7 +29,7 @@ public class LoginController {
         JSONObject jsonObject = new JSONObject();
 
         User user1 = loginService.LoginVerification(user);
-        if(user1 != null){
+        if(user1 != null) {
             jsonObject.put("Status","true");
             return jsonObject.toJSONString();
         }else{

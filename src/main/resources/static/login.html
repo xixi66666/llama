@@ -107,13 +107,17 @@
 
 <script>
   const form = document.getElementById('login-form');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // 防止页面刷新
 
     // 获取用户输入的用户名和密码
-    const name = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const name = usernameInput.value;
+    const password = passwordInput.value;
+    // const name = document.getElementById('username').value;
+    // const password = document.getElementById('password').value;
 
     // 构建请求体
     const loginData = {
@@ -141,6 +145,12 @@
           window.location.href = '/index.html'; // 登录成功后跳转到主页
         }else{
           alert(data["Status"])
+          // 清除输入字段
+          usernameInput.value = '';
+          passwordInput.value = '';
+
+          // 可选：聚焦到第一个输入字段以便用户重新输入
+          usernameInput.focus();
         }
       } else {
         // 登录失败，显示错误信息
@@ -150,6 +160,11 @@
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred while trying to log in.');
+      // 清除输入字段（在捕获到异常时也进行清除）
+      usernameInput.value = '';
+      passwordInput.value = '';
+      // 可选：聚焦到第一个输入字段以便用户重新输入
+      usernameInput.focus();
     }
   });
 </script>
