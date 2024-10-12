@@ -3,7 +3,6 @@ package com.example.model.llama;
 
 import okhttp3.*;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
